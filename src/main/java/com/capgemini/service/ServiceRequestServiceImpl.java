@@ -29,44 +29,44 @@ public class ServiceRequestServiceImpl implements IServiceRequestService {
 	@Autowired
 	private MechanicsRepository mechanicsrepository;
 	@Override
-	public String createServiceRequest(ServiceRequest serviceRequest) {
-		if(serviceRequest.getVehicle()!=null) {
-			Vehicle vehi=vehiclerepository.findById(serviceRequest.getVehicle().getVehicle_reg_no()).get();
-			serviceRequest.setVehicle(vehi);
+	public String createServiceRequest(ServiceRequest servicerequest) {
+		if(servicerequest.getVehicle()!=null) {
+			Vehicle vehi=vehiclerepository.findById(servicerequest.getVehicle().getVehicle_reg_no()).get();
+			servicerequest.setVehicle(vehi);
 		}
-		if(serviceRequest.getServiceCatalog()!=null) {
-			ServiceCatalog ser_cat=sercatrepo.findById(serviceRequest.getServiceCatalog().getService_catalog_id()).get();
-			serviceRequest.setServiceCatalog(ser_cat);
+		if(servicerequest.getServiceCatalog()!=null) {
+			ServiceCatalog ser_cat=sercatrepo.findById(servicerequest.getServiceCatalog().getService_catalog_id()).get();
+			servicerequest.setServiceCatalog(ser_cat);
 		}
-		if(serviceRequest.getMechanics()!=null) {
-			Mechanics mech=mechanicsrepository.findById(serviceRequest.getMechanics().getMechanicsId()).get();
-			serviceRequest.setMechanics(mech);
+		if(servicerequest.getMechanics()!=null) {
+			Mechanics mech=mechanicsrepository.findById(servicerequest.getMechanics().getMechanicsId()).get();
+			servicerequest.setMechanics(mech);
 		}
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-		serviceRequest.create_Date_Time = java.time.LocalDateTime.now().format(formatter);
-		serviceRequest.update_Date_Time = java.time.LocalDateTime.now().format(formatter);
-		serviceRequest.date = java.time.LocalDateTime.now().format(formatter);
+		servicerequest.create_Date_Time = java.time.LocalDateTime.now().format(formatter);
+		servicerequest.update_Date_Time = java.time.LocalDateTime.now().format(formatter);
+		servicerequest.date = java.time.LocalDateTime.now().format(formatter);
 		
-		serreqrepository.save(serviceRequest);
+		serreqrepository.save(servicerequest);
 		return "Request Added!!!";
 	}
 
 	@Override
-	public String updateServiceRequest(int serviceRequest_id, ServiceRequest serviceRequest) {
-		ServiceRequest dbServiceRequest= serreqrepository.findById(serviceRequest_id).get();
+	public String updateServiceRequest(int service_req_id, ServiceRequest servicerequest) {
+		ServiceRequest dbServiceRequest= serreqrepository.findById(service_req_id).get();
 		if(dbServiceRequest!=null) {
 			
-			dbServiceRequest.setStatus(serviceRequest.getStatus());
+			dbServiceRequest.setStatus(servicerequest.getStatus());
 			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-			serviceRequest.update_Date_Time = java.time.LocalDateTime.now().format(formatter);
+			servicerequest.update_Date_Time = java.time.LocalDateTime.now().format(formatter);
 		}
 		serreqrepository.save(dbServiceRequest);
 			return "Status Updated";
 	}
 
 	@Override
-	public ServiceRequest getServiceRequestById(int serviceRequest_id) {
-		return serreqrepository.findById(serviceRequest_id).get();
+	public ServiceRequest getServiceRequestById(int service_req_id) {
+		return serreqrepository.findById(service_req_id).get();
 	}
 
 	@Override
@@ -75,8 +75,8 @@ public class ServiceRequestServiceImpl implements IServiceRequestService {
 	}
 
 	@Override
-	public String deleteServiceRequest(int serviceRequest_id) {
-		ServiceRequest dbServiceRequest= serreqrepository.findById(serviceRequest_id).get();
+	public String deleteServiceRequest(int service_req_id) {
+		ServiceRequest dbServiceRequest= serreqrepository.findById(service_req_id).get();
 		if(dbServiceRequest.isDeleted == false) {
 			dbServiceRequest.isDeleted = true;
 			serreqrepository.save(dbServiceRequest);

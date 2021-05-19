@@ -23,7 +23,7 @@ public class UserDetailsController {
 	private UserDetailsServiceImpl userdetailserviceimpl;
 	
 	@PostMapping("/")
-	public String create(@RequestBody UserDetails userdetails) {
+	public UserDetails create(@RequestBody UserDetails userdetails) {
 		return userdetailserviceimpl.createUserDetails(userdetails);
 	}
 	

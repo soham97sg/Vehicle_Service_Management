@@ -5,9 +5,9 @@ import java.util.List;
 import com.capgemini.entities.ServiceRequest;
 
 public interface IServiceRequestService {
-String createServiceRequest(ServiceRequest serviceRequest);
-String updateServiceRequest(int serviceRequest_id,ServiceRequest serviceRequest);
-ServiceRequest getServiceRequestById(int serviceRequest_id);
+String createServiceRequest(ServiceRequest servicerequest);
+String updateServiceRequest(int serviceRequest_id,ServiceRequest servicerequest);
+ServiceRequest getServiceRequestById(int service_req_id);
 List<ServiceRequest> getRequest();
-String deleteServiceRequest(int serviceRequest_id );
+String deleteServiceRequest(int service_req_id );
 }

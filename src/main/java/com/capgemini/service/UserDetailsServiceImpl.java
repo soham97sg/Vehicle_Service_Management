@@ -13,13 +13,13 @@ public class UserDetailsServiceImpl implements IUserDetailsService {
 	@Autowired
 	private UserDetailsRepository userdetailrepository;
 	@Override
-	public String createUserDetails(UserDetails userDetails) {
+	public UserDetails createUserDetails(UserDetails userDetails) {
 		
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 		userDetails.create_Date_Time = java.time.LocalDateTime.now().format(formatter);
 		userDetails.update_Date_Time = java.time.LocalDateTime.now().format(formatter);
 		userdetailrepository.save(userDetails);
-		return "User Details Added!!!";
+		return userDetails;
 	}
 
 	@Override
